@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB Enquiries Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF; /* Darker background for contrast */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+        
+        h1 {
+            color: #FF0000;
+            font-size: 30px; 
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Form container */
+        form {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+            max-width: 300px;
+            width: 100%;
+        }
+
+        /* Input labels */
+        label {
+            font-size: 14px; /* Slightly larger label font */
+            color: #FFB6C1; /* Dark gray for labels */
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Input fields */
+        input[type="text"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 12px; /* Slightly larger padding */
+            margin-bottom: 20px;
+            border: 1px solid #ced4da; /* Light border color */
+            border-radius: 5px;
+            background-color: #f8f9fa; /* Light background for inputs */
+            font-size: 15px;
+            color: #495057; /* Darker text in input */
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        /* Focus styling for input */
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus {
+            border-color: #4CAF50; /* Green focus border */
+            outline: none;
+            background-color: #ffffff; /* White background on focus */
+        }
+
+        /* Submit button */
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green color */
+            color: #ffffff;
+            padding: 14px; /* Increased padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 17px; /* Larger font size */
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        /* Submit button hover */
+        input[type="submit"]:hover {
+            background-color: #388e3c; /* Darker green on hover */
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 500px) {
+            form {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>WEB FORM ENQUIRY</h1>
+    
+    <form id="enquiryForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="course">Select Course Detail:</label>
+        <select id="course" name="course" required>
+            <option value="" disabled selected>Select your course</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="ruby">Ruby</option>
+            <option value="sql">SQL</option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('https://script.google.com/macros/s/AKfycbzyHdu4v9--DI1nUqyUX5ggYWvVO2Jpkir7qyLu1A5Q34RnviR3QlcrYortivFP_bvc/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert('The form was submitted successfully.');
+                } else {
+                    alert('Please check your network connection and try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
